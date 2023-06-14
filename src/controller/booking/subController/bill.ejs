@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório</title>
+
+    <link href="https://unpkg.com/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+
+    
+    <style>
+        table {
+            width: 100%;
+        }
+        th {
+            text-align: left;
+        }
+    </style>
+</head>
+<body class="bg-purple-100">
+    <div class="m-8">           
+        <h1 class="text-3xl mb-8">Sadhan Booking Bill </h1>
+        <h2 class="text-2xl mb-8 text-indigo-900">Thank you <%=user.name%> and <%=owner.name%> for choosing us</h2>
+        <table>
+          <h3>Rentee Information</h3>
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Email Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td><%= user.name %></td>
+                        <td><%= user.email %></td>
+                    </tr>
+            </tbody>
+        </table>
+        <table>
+          <h3>Owner Information</h3>
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Email Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td><%= owner.name %></td>
+                        <td><%= owner.email %></td>
+                    </tr>
+            </tbody>
+        </table>
+         <table>
+          <h3>Booking Details</h3>
+            <thead>
+                <tr>
+                    <th>Vehicle Name</th>
+                    <th>Model</th>
+                    <th>Vehicle Number</th>
+                    <th>Price/day</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Total Amount Paid</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td><%= vehicleInfo.name %></td>
+                        <td><%= vehicleInfo.model %></td>
+                        <td><%= vehicleInfo.number %></td>
+                        <td>Rs <%= vehicleInfo.price %> /day</td>
+                        <td><%= vehicleInfo.startDate %></td>
+                        <td><%= vehicleInfo.endDate %></td>
+                        <td>Rs <%= vehicleInfo.amount %></td>
+                        <td>Verified</td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
