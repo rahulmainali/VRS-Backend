@@ -13,7 +13,7 @@ const login = async (req: any, res: any, next: NextFunction) => {
     return res
       .status(StatusCodes.UNAUTHORIZED)
       .send(
-        "Client side validation issues. Please carefully send the right format of email and password !!"
+        "Server side validation issues. Please carefully send the right format of email and password !!"
       );
   }
 
@@ -40,13 +40,19 @@ const login = async (req: any, res: any, next: NextFunction) => {
         });
       }
 
-      const payload = data[0];
+
+      const payload : any = data[0];
+      console.log(payload.image)
+      let role = payload?.role === 'owner' ? 'owner' : 'user';
       const jwtPayload = {
         id: payload._id,
         firstName: payload.firstName,
         lastName: payload.lastName,
         email: email,
-        role: "user",
+        role: role,
+        status: payload.status,
+        method: "custom",
+        image: payload.image ? payload.image : null
       };
       const { ACCESS_TOKEN, REFRESH_TOKEN } = await auth.GENERATE_JWT(
         jwtPayload
@@ -75,6 +81,9 @@ const login = async (req: any, res: any, next: NextFunction) => {
             email: email,
             firstName: data[0].firstName,
             lastName: data[0].lastName,
+            role: role,
+            method: 'custom',
+            image: payload.image ? payload.image : null,
           });
         });
       } catch (err) {

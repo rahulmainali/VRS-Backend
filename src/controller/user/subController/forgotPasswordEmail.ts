@@ -8,7 +8,9 @@ const forgotPasswordEmail = async (req: Request, res: Response) => {
   if (email) {
     try {
       // try finding the user with the email
-      const user = await userModel.findOne({ email: email });
+      let user = await userModel.findOne({ email: email });
+      console.log(user)
+      if(!user) user = await adminModel.findOne({email:email})
       if (user) {
         // generate token
         const token = jwt.sign({ id: user._id }, process.env.ACCESS_TOKEN_KEY, {

@@ -22,8 +22,12 @@ const forgotPassword = async (req: Request, res: Response) => {
 
                 console.log(verifyToken);
                 if (verifyToken) {
-                    const response = await userModel.findByIdAndUpdate(id, {
+                    let response = await userModel.findByIdAndUpdate(id, {
                         password: password
+                    })
+                    if(!response) response = await adminModel.findByIdAndUpdate(id,{
+                        password: password
+
                     })
                     return res.status(200).send({ message: "Password changed successfully" })
                 }
